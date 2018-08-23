@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import './App.css';
 class App extends Component {
   render() {
     const text = "당신은 어떠신가요?";
@@ -15,7 +15,7 @@ class App extends Component {
     };
 
     return (
-      <div>
+      <div className="my-div">
         <h1>리액트 안녕!</h1>
         <h2>{text}</h2>
         {
