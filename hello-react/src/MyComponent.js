@@ -8,13 +8,15 @@ class MyComponent extends Component {
     }
 
     static propTypes = {
-        name: PropTypes.string
+        name: PropTypes.string,
+        age: PropTypes.number.isRequired
     }
 
     render() {
         return (
             <div>
-                Hello, My name is {this.props.name}.
+                <p>Hello, My name is {this.props.name}.</p>
+                <p>I am {this.props.age} old year. </p>
             </div>
         )
     }
