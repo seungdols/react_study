@@ -5,9 +5,13 @@ class MyComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            number: 0
-        }
+        // this.state = {
+        //     number: 0
+        // }
+    }
+
+    state = {
+        number: 0
     }
 
     // 2. transform-class-properties 사용
