@@ -25,6 +25,12 @@ export default class EventPractice extends Component {
         })
     }
 
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.handleClick();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -32,7 +38,7 @@ export default class EventPractice extends Component {
                 <input type="text" name="username" value={this.state.username}
                 placeholder="input username in here" onChange={this.handleChange}/>
                 <input type="text" name="message" value={this.state.message}
-                placeholder="input text in here" onChange={this.handleChange}/>
+                placeholder="input text in here" onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
                 <button onClick={this.handleClick}>확인</button>
             </div>
         )
