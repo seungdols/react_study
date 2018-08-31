@@ -5,7 +5,7 @@ console.log(styles)
 class App extends Component {
   render() {
     return (
-      <div className={styles.box}>
+      <div className={ [styles.box, styles.blue].join('') }>
 
       </div>
     );
