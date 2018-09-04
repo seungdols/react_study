@@ -191,6 +191,7 @@ module.exports = {
               {
                 loader: require.resolve('sass-loader'),
                 options: {
+                  includePaths: [paths.styles],
                   modules: true,
                   localIdentName: '[path][name]__[local]--[hash:base64:5]'
                 },
