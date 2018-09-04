@@ -188,6 +188,13 @@ module.exports = {
                   ],
                 },
               },
+              {
+                loader: require.resolve('sass-loader'),
+                options: {
+                  modules: true,
+                  localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                },
+              },
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
