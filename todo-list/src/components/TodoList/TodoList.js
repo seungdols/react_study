@@ -3,10 +3,15 @@ import TodoItem from '../TodoItem'
 
 export default class TodoList extends Component {
     render() {
+        const {todos} = this.props;
+        const todoList = todos.map(
+            todo => (
+                <TodoItem key={todo.id} done={todo.done}>{todo.text}</TodoItem>
+            )
+        );
         return (
             <div>
-                <TodoItem done>Learn React</TodoItem>
-                <TodoItem>Try Component styling</TodoItem>
+                {todoList}
             </div>
         )
     }

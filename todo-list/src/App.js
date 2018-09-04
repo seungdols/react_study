@@ -5,7 +5,11 @@ import TodoList from './components/TodoList'
 export default class App extends Component {
 
     state = {
-        input: ""
+        input: "",
+        todos: [
+            {id: 0, text: 'Learn React', done: true},
+            {id: 1, text: 'Try to Component Styling', done: false},
+        ]
     }
 
     handleChange = (e) => {
@@ -17,14 +21,14 @@ export default class App extends Component {
 
 
     render() {
-        const {input} = this.state;
+        const {input, todos} = this.state;
         const {
             handleChange
         } = this;
         return (
             <PageTemplate>
                 <TodoInput onChange={handleChange} value={input} />
-                <TodoList />
+                <TodoList todos={todos} />
             </PageTemplate>
         )
     }
