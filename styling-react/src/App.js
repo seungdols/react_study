@@ -11,7 +11,7 @@ class App extends Component {
 
     return (
       <div>
-          <StyledButton>Button</StyledButton>
+          <StyledButton big>Button</StyledButton>
       </div>
     );
   }
