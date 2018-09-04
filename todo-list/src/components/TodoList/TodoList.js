@@ -3,10 +3,10 @@ import TodoItem from '../TodoItem'
 
 export default class TodoList extends Component {
     render() {
-        const {todos} = this.props;
+        const {todos, onToggle} = this.props;
         const todoList = todos.map(
             todo => (
-                <TodoItem key={todo.id} done={todo.done}>{todo.text}</TodoItem>
+                <TodoItem key={todo.id} done={todo.done} onToggle={() => onToggle(todo.id)}>{todo.text}</TodoItem>
             )
         );
         return (

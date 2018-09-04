@@ -40,16 +40,35 @@ export default class App extends Component {
         })
     }
 
+    handleToggle = (id) => {
+        const {todos} = this.state;
+        const index = todos.findIndex(todo => todo.id === id);
+
+        const toggledTodo = {
+            ...todos[index],
+            done: !todos[index].done
+        };
+
+        this.setState({
+            todos: [
+                ...todos.slice(0, index),
+                toggledTodo,
+                ...todos.slice(index+1, todos.length)
+            ]
+        });
+   }
+
     render() {
         const {input, todos} = this.state;
         const {
             handleChange,
-            handleInsert
+            handleInsert,
+            handleToggle
         } = this;
         return (
             <PageTemplate>
                 <TodoInput onChange={handleChange} onInsert={handleInsert} value={input} />
-                <TodoList todos={todos} />
+                <TodoList todos={todos} onToggle={handleToggle} />
             </PageTemplate>
         )
     }
