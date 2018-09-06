@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import PageTemplate from './components/PageTemplate'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
+
+
+
+const initialTodos = new Array(500).fill(0).map(
+    (foo, index) => ({id: index, text: `일정 ${index}`, done: false})
+)
 export default class App extends Component {
 
     state = {
         input: "",
-        todos: [
-            {id: 0, text: 'Learn React', done: true},
-            {id: 1, text: 'Try to Component Styling', done: false},
-        ]
+        todos: initialTodos
     }
 
     handleChange = (e) => {
