@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by seungdols (http://jsbin.com/vitaruk/7/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+<script id="jsbin-javascript">
+//console.log(Redux);
+
+const MY_INCREMENT = 'INCREMENT';
+const MY_DECREMENT = 'DECREMENT';
+
+const increment = (data) => ({
+  type: MY_INCREMENT,
+  diff: data
+});
+
+const decrement = (data) => ({
+  type: MY_DECREMENT,
+
+  diff: data
+});
+
+
+console.log(increment(1));
+
+const initialState = {
+  number: 0
+}
+
+function counter(state = initialState, action) {
+  switch(action.type) {
+   case MY_INCREMENT: 
+     return { number: state.number + action.diff }
+   case MY_DECREMENT:
+     return { number: state.number - action.diff }
+   default: 
+     return state;
+  }
+}
+
+const initialStateWithObj = {
+  number: 0,
+  foo: 'bar',
+  baz: 'qux'
+}
+
+function counter2(state = initialStateWithObj, action) {
+  switch(action.type) {
+   case MY_INCREMENT: 
+     return Object.assign({}, state, { number: state.number + action.diff })
+   case MY_DECREMENT:
+     return Object.assign({}, state, { number: state.number - action.diff })
+   default: 
+     return state;
+  }
+}
+
+//console.log(counter(undefined, increment(2)));
+
+const { createStore } = Redux;
+
+const store = createStore(counter);
+
+const unsubscribe = store.subscribe(() => { 
+  console.log(store.getState()) 
+});
+
+store.dispatch(increment(1));
+store.dispatch(decrement(5));
+store.dispatch(increment(10));
+
+
+
+
+
+</script>
+</body>
+</html>
