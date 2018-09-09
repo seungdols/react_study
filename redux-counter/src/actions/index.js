@@ -21,5 +21,6 @@ export const decrement = (index) => ({
 
 export const setColor = ({index, color}) => ({
     type: types.SET_COLOR,
+    index,
     color
 })
