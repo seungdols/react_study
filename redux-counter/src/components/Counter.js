@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import './Counter.css'
 
 const Counter = ({number, color, index, onIncrement, onDecrement, onSetColor}) => {
-        return (
-            <div
-                className="Counter"
-                onClick={onIncrement(index)}
-                onContextMenu={(e) => {
+    return (
+        <div
+            className="Counter"
+            onClick={() => onIncrement(index)}
+            onContextMenu={
+                (e) => {
                     e.preventDefault();
                     onDecrement(index);
-                }}
-                onDoubleClick={onSetColor(index)}
-                style={{backgroundColor: color}} >
+                }
+            }
+            onDoubleClick={() => onSetColor(index)}
+            style={{backgroundColor: color}}>
                 {number}
-            </div>
-        )
-}
+        </div>
+    );
+};
 
 Counter.propTypes = {
     index: PropTypes.number,
