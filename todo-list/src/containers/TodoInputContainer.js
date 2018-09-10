@@ -39,6 +39,7 @@ class TodoInputContainer extends Component {
         <TodoInput
           onChange={handleChange}
           onInsert={handleInsert}
+          value={value}
         />
       </div>
     )
