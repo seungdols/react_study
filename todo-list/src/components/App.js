@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import PageTemplate from './components/PageTemplate'
-import TodoInput from './components/TodoInput'
-import TodoList from './components/TodoList'
+import PageTemplate from './PageTemplate'
+import TodoInput from './TodoInput'
+import TodoList from './TodoList'
 
 
 
