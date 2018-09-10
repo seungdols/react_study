@@ -23,7 +23,7 @@ const initialState = List([
   })
 ])
 
-const default handleActions({
+export default handleActions({
   [INSERT]: (state, action) => {
     const { id, text, done } = action.payload
 
