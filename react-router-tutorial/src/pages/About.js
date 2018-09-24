@@ -1,12 +1,15 @@
 import React from 'react'
+import queryString from 'query-string'
 
-const About = ({match}) => {
+const About = ({location, match}) => {
+  const query = queryString.parse(location.search)
+  const { color } = query
+  console.log(query, color)
   return (
     <div>
-      <h2>Introduce</h2>
+      <h2 style={{ color }}>Introduce</h2>
       <p>
         Hello, It's react router.
-        My name is {match.params.name}.
       </p>
     </div>
   )
