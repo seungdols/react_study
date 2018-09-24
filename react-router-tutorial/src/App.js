@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Home, About } from './pages'
+import { Home, About, Posts } from './pages'
 import Menu from './components/Menu'
 
 const App = () => {
@@ -11,6 +11,7 @@ const App = () => {
       <Switch>
         <Route path="/about/:name" component={About} />
         <Route path="/about" component={About} />
+        <Route path="/posts" component={Posts} />
       </Switch>
     </div>
   )
