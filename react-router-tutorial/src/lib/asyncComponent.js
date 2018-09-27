@@ -11,11 +11,10 @@ export default function asyncComponent(getComponent) {
       super(props);
       if (AsyncComponent.Component) return;
       getComponent().then(({default: Component}) => {
-        AsyncComponent.Component = Comment
-        this.setState({Comment})
+        AsyncComponent.Component = Component
+        this.setState({Component})
       });
     }
-
 
   render() {
       const { Component } = this.state
