@@ -1,7 +1,15 @@
+require('dotenv').config();
+
 const Koa = require('koa');
-const Router = require('koa-router')
-const bodyParser = require('koa-bodyparser')
-const api = require('./api')
+const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
+const api = require('./api');
+
+const {
+  PORT: port = 4000,
+  MONGO_URI: mongoURI
+} = process.env;
+
 const app = new Koa();
 const router = new Router();
 
@@ -10,7 +18,7 @@ router.use('/api', api.routes())
 app.use(bodyParser())
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(4000, () => {
-  console.log('listening to port 4000');
+app.listen(port, () => {
+  console.log('listening to port', port);
 });
 
