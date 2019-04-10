@@ -43,9 +43,23 @@ try {
 };
 exports.list = async (ctx) => {
 
+  const page = parseInt(ctx.query.page || 1, 10);
+
+  if (page < 1 ) {
+    ctx.status = 400;
+    return;
+  }
+
+  const limitBodyLength = post => ({
+    ...post,
+    body: post.body.length < 200? post.body :`${post.body.slice(0, 200)}...`
+  });
+
   try {
-    const posts = await Post.find().exec();
-    ctx.body = posts;
+    const posts = await Post.find().sort({_id: -1}).limit(3).skip((page - 1) * 3).lean().exec();
+    const postCount = await Post.count().exec();
+    ctx.set('Last-page', Math.ceil(postCount/3))
+    ctx.body = posts.map(limitBodyLength);
   } catch(e) {
     ctx.throw(e, 500);
   }
