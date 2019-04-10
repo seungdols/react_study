@@ -1,6 +1,7 @@
-const Post = require('models/post')
-const { ObjectId } = require('mongoose')
-exports.checkObjectIs = (ctx, next) => {
+const Post = require('models/post');
+const Joi = require('joi');
+const { ObjectId } = require('mongoose');
+exports.checkObjectId = (ctx, next) => {
   const { id } = ctx.params;
 
   if (!ObjectId.isValid(id)) {
@@ -11,6 +12,21 @@ exports.checkObjectIs = (ctx, next) => {
   return next();
 };
 exports.write = async (ctx) => {
+const schema = Joi.object().keys({
+  title: Joi.string().required(),
+  body: Joi.string().required(),
+  tags: Joi.array().items(Joi.string()).required()
+});
+
+const result = Joi.validate(ctx.request.body, schema);
+
+if(result.error) {
+  ctx.status = 400;
+  ctx.body = result.error;
+  return ;
+}
+
+
 const { title, body, tags } = ctx.request.body;
 
 const post = new Post({

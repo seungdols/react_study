@@ -26,4 +26,13 @@ Content-Type: application/json
 {
   "title": "change title"
 }
-###
+####
+
+POST http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+  "title": "title",
+  "body": "contents"
+}
+#####
