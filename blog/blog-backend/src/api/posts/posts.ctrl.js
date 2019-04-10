@@ -1,5 +1,15 @@
 const Post = require('models/post')
+const { ObjectId } = require('mongoose')
+exports.checkObjectIs = (ctx, next) => {
+  const { id } = ctx.params;
 
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    return null;
+  }
+
+  return next();
+};
 exports.write = async (ctx) => {
 const { title, body, tags } = ctx.request.body;
 
