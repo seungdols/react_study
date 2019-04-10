@@ -36,3 +36,6 @@ Content-Type: application/json
   "body": "contents"
 }
 #####
+###
+GET http://localhost:4000/api/posts?page=1
+###
