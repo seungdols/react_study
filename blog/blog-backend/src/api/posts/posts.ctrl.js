@@ -1,90 +1,65 @@
-let postId = 1;
+const Post = require('models/post')
 
-const posts = [
-  {
-    id: 1,
-    title: 'title',
-    body: 'contents'
-  }
-];
+exports.write = async (ctx) => {
+const { title, body, tags } = ctx.request.body;
 
-exports.write = (ctx) => {
-  const { title, body } = ctx.request.body;
+const post = new Post({
+  title, body, tags
+});
 
-  postId += 1;
-  const post = {id: postId, title, body };
-  posts.push(post);
+try {
+  await post.save();
   ctx.body = post;
+} catch(e) {
+  ctx.throw(e, 500);
 }
 
-exports.list = (ctx) => {
-  ctx.body = posts;
-}
+};
+exports.list = async (ctx) => {
 
-exports.read = (ctx) => {
-  const { id } = ctx.params;
+  try {
+    const posts = await Post.find().exec();
+    ctx.body = posts;
+  } catch(e) {
+    ctx.throw(e, 500);
+  }
+};
+exports.read = async (ctx) => {
+ const { id } = ctx.params;
+ try { 
+   const post = await Post.findById(id).exec();
 
-  const post = posts.find(p => p.id.toString() === id);
-  if (!post) {
-    ctx.status = 404;
-    ctx.body = {
-      message: 'Not Post'
+   if(!post) {
+     ctx.status = 404;
+     return ;
+   }
+   ctx.body = post;
+ } catch(e) {
+   
+ }
+};
+exports.remove = async (ctx) => {
+ const { id } = ctx.params;
+ try {
+   await Post.findByIdAndRemove(id).exec();
+   ctx.status = 204;
+ } catch(e) {
+   ctx.throw(e, 500);
+ }
+};
+
+exports.update = async (ctx) => {
+  const {id} = ctx.params;
+  try {
+    const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
+      new: true
+    }).exec();
+    if (!post) {
+      ctx.status = 404;
+      return;
     }
-    return;
+    ctx.body = post
+  } catch(e) {
+    ctx.throw(e, 500);
   }
-  ctx.body = post
-}
-
-exports.remove = (ctx) => {
-  const { id } = ctx.params;
-  const index = posts.findIndex(p => p.id.toString() === id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = {
-      message: 'Not Post'
-    }
-    return;
-  }
-
-  posts.splice(index, 1)
-  ctx.status = 204
-}
-
-exports.replace = (ctx) => {
-  const { id } = ctx.params;
-  const index = posts.findIndex(p => p.id.toString() === id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = {
-      message: 'Not Post'
-    }
-    return;
-  }
-
-  posts[index] = {
-    id,
-    ...ctx.request.body
-  }
-  ctx.body = posts[index]
-}
-
-exports.update = (ctx) => {
-  const { id } = ctx.params;
-  const index = posts.findIndex(p => p.id.toString() === id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = {
-      message: 'Not Post'
-    }
-    return;
-  }
-
-  posts[index] = {
-    ...posts[index],
-    ...ctx.request.body
-  }
-  ctx.body = posts[index]
-}
+};

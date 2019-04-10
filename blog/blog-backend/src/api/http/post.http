@@ -1,0 +1,29 @@
+###
+POST http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+  "title": "title",
+  "body": "contents",
+  "tags": ["tag", "array", "post"]
+}
+###
+
+### 
+GET http://localhost:4000/api/posts
+###
+
+###
+GET http://localhost:4000/api/posts/5cae153c6c861d1885136a4a
+###
+###
+DELETE http://localhost:4000/api/posts/5cae153c6c861d1885136a4a
+###
+###
+PATCH http://localhost:4000/api/posts/5cae17880326551e35e8b4c9
+Content-Type: application/json
+
+{
+  "title": "change title"
+}
+###
